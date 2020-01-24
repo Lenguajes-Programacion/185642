@@ -8,6 +8,7 @@ namespace practica_uno
         static void Main(string args)
         {
             Console.WriteLine("Hola Mundo");
+
         }
     }
 }
