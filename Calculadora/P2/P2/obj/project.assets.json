@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alumno\\source\\repos\\185642\\Calculadora\\Calculadora\\Calculadora.csproj",
-      "projectName": "Calculadora",
-      "projectPath": "C:\\Users\\alumno\\source\\repos\\185642\\Calculadora\\Calculadora\\Calculadora.csproj",
+      "projectUniqueName": "C:\\Users\\alumno\\source\\repos\\Pract2\\Pract2\\Pract2.csproj",
+      "projectName": "Pract2",
+      "projectPath": "C:\\Users\\alumno\\source\\repos\\Pract2\\Pract2\\Pract2.csproj",
       "packagesPath": "C:\\Users\\alumno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alumno\\source\\repos\\185642\\Calculadora\\Calculadora\\obj\\",
+      "outputPath": "C:\\Users\\alumno\\source\\repos\\Pract2\\Pract2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
