@@ -53,10 +53,34 @@ namespace Practica2
                         Console.WriteLine("{0} / {1} = {2}", valor1, valor2, R);
                         break;
                 }
+
                 Console.Write("n¿Desea Continuar? s/n: "); 
                 resp = Console.ReadLine();
             }
             while (resp == "si");
+        }
+        public void LeerMemoria()
+        {
+            String archivoDB = "../../../db.jason";
+            StreamReader reader = new StreamReader(archivoDB);
+                    
+        }
+        Console.WriteLine("Dato en memoria:");
+        MemoriaData memoriaData = new MemoriaData(DataTime.Now.item["operacion"]);
+        Console.WriteLine(key.ToString());
+        Console.WriteLine(memoriaData.resiltado.ToString());
+    }
+    class MemoriaData
+    {
+        public DataTime fecha;
+        public String operacion;
+        public int resultado;
+
+        public MemoriaData(DateTime date, string operacion, int result)
+        {
+            fecha = date;
+            operacion = operation;
+            resultado = result;
         }
     }
 }
