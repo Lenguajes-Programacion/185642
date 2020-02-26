@@ -77,6 +77,7 @@ namespace Practica2
         public int resultado;
 
         public MemoriaData(DateTime date, string operacion, int result)
+
         {
             fecha = date;
             operacion = operation;
