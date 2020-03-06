@@ -84,4 +84,28 @@ namespace Practica2
             resultado = result;
         }
     }
+    public void arreglo()
+    {
+        string[] Colores = ["Rojo", "Blanco", "Verde"];
+        //List<string> colores = ["rojo", "blanco", "verde"];
+        //colores.Sort();
+        Array.Sort(Colores);
+        Array.ForEach(Colores, (item)=>{
+            Console.WriteLine(item);
+            });
+        sting color = Array.Find(Colores, (item) =>{
+            return item == "verde";
+        });
+        Console.WriteLine(color);
+        Console.WriteLine("Accede tus colores y separalos con comas(,)");
+        string colorUser = Console.ReadLine();
+        string[] newColors = colorUser.Split(' ');
+        Console.WriteLine(newColors);
+    }
+    public void multidimensional()
+    {
+        int[,,] array = new int [4,2,3];
+        Console.WriteLine(array);
+
+    }
 }

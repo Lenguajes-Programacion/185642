@@ -2,19 +2,19 @@
   "key": "value",
   "arreglo": [
     {
-
+      "fecha": "2020-02-21",
+      "operacion": "5+5",
+      "resultado": 10
+    },
+    {
+      "fecha": "2020-02-20",
+      "operacion": "5+5",
+      "resultado": 10
+    },
+    {
+      "fecha": "2020-02-19"
+      "operacion": "5+5",
+      "resultado": 10
     }
-  ],
-  "2020-02-21": {
-    "operacion": "5+5",
-    "resultado": 10
-  },
-  "2020-02-20": {
-    "operacion": "5+5",
-    "resultado": 10
-  },
-  "2020-02-19": {
-    "operacion": "5+5",
-    "resultado": 10
-  }
+  ]
 }
