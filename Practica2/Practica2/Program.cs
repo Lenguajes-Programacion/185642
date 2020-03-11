@@ -7,7 +7,7 @@ namespace Practica2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Calc(string[] args)
         {
             string resp ="";
            do
@@ -104,8 +104,57 @@ namespace Practica2
     }
     public void multidimensional()
     {
-        int[,,] array = new int [4,2,3];
+        int[,,] array = new int [4,4,4];
         Console.WriteLine(array);
 
+    }
+    public void Main(String[] args)
+    {
+        bool salir = false;
+        while(!salir)
+        {
+            Console.WriteLine("Arreglo sencillo");
+            string[] sencillo = {"Rojo", "Blanco", "Morado"};
+            Console.WriteLine("[{0}]", string.Join(", ", sencillo));
+            int[,,] array = new int [5,5];
+            Console.WriteLine("[{0}]", string.Join(", ", dosDimenciones));
+            for(int i = 0; i < dosDimenciones.GetLenght(0); i++;
+            {
+                for int j = 0; j < dosDimenciones.GetLenght(1); i++;
+                {
+                     Console.WriteLine("{0},{1}={2}", i, j, dosDimenciones[i, j];
+                }
+            }
+            int[,,] array = new int [5,5,5];
+            for(int i = 0; i < tresDimenciones.GetLenght(0); i++;
+            {
+                for int j = 0; j < tresDimenciones.GetLenght(1); j++;
+                {
+                     for int k = 0; k < tresDimenciones.GetLenght(2); i++;
+                    {
+                        Console.WriteLine("{0},{1},{2}={3}", i, j, K, tresDimenciones[i,j,k];
+                    }
+                }
+            }
+            Console.WriteLine("[{0}]", string.Join(", ", tresDimenciones));
+            string exit = Console.ReadLine();
+            int[,,] array = new int [5,5,5];
+            for(int i = 0; i < cuatroDimenciones.GetLenght(0); i++;
+            {
+                for int j = 0; j < cuatroDimenciones.GetLenght(1); j++;
+                {
+                     for int k = 0; k < cuatrDimenciones.GetLenght(2); k++;
+                    {
+                        for int l = 0; l < cuatroDimenciones.GetLenght(3); l++;
+                        {
+                            Console.WriteLine("{0},{1},{2}={3}", i, j, k, l cuatroDimenciones[i,j,k, l];
+
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("[{0}]", string.Join(", ", tresDimenciones));
+            string exit = Console.ReadLine();
+        }
     }
 }
