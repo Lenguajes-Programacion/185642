@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 
 namespace Practica2
@@ -59,102 +61,151 @@ namespace Practica2
             }
             while (resp == "si");
         }
-        public void LeerMemoria()
+        class Memoria
         {
-            String archivoDB = "../../../db.jason";
-            StreamReader reader = new StreamReader(archivoDB);
-                    
+            public List<MemoriaData> db = new List<MemoriaData>();
+            public Memoria()
+            {
+                db = new List<MemoriaData>();
+            }
+            public void LeerMemoria()
+            {
+                ConsoleColor currentColor = Console.BackgroundColor;
+                string archivoDB = "../../../db.json";
+                StreamReader reader = new StreamReader(archivoDB);
+                var dbJSON = reader.ReadToEnd();
+                var dbObject = JObject.Parse(dbJSON);
+                foreach (var item  in dbObject)
+                {
+                    MemoriaData memoriaData = new MemoriaData(item.Key.ToString(), item.Value["operacion"].ToString(),item.Value["resultado"].ToString());
+                    this.db.Add(memoriaData);
+                    Console.WriteLine("Dato en memoria: ({0})", i);
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("{0} - {1}", memoriaData.fecha.ToLongDateString(),
+                    memoriaData.fecha.ToLongTimeString());
+                    Console.ResetColor();
+                    Console.WriteLine("Operación: {0}",memoriaData.operacion);
+                    Console.WriteLine("Resultado: {0}",memoriaData.resultado.ToString());
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("----------------- \n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    i++;
+                }
+            }
+            public int GetMemoriaData(String key)
+            {
+                int index = int.Parse(key);
+                MemoriaData data = db[index];
+                return data.resultado;
+            }
+            public void GuardarMemoria(MemoriaData data)
+            {
+                db.Add(data);
+                int i = 0;
+                db.ForEach((MemoriaData memoriaData) =>
+                {
+                    Console.WriteLine("Dato en memoria: ({0})", i);
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.WriteLine("{0} - {1}", memoriaData.fecha.ToLongDateString(),
+                    memoriaData.fecha.ToLongTimeString());
+                    Console.ResetColor();
+                    Console.WriteLine("Operación: {0}", memoriaData.operacion);
+                    Console.WriteLine("Resultado: {0}", memoriaData.resultado.ToString());
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("----------------- \n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    i++;
+                });
+                string json = JsonConvert.SerializeObject(db.ToArray(), Formatting.Indented);
+                string archivoDB = "../../../db.json";
+                File.WriteAllText(archivoDB, json);
+            }
+            public void arreglo()
+            {
+                string[] Colores = { "Rojo", "Blanco", "Morado" };
+                //List<string> colores = ["Rojo", "Blanco", "Morado"];
+                //colores.Sort();
+                Array.Reverse(Colores);
+                Array.ForEach(Colores, (item)=>{
+                    Console.WriteLine(item);
+                });
+                String color = Array.Find(Colores, (item) => {
+                    return item.Length > 4;
+                });
+                Console.WriteLine(color);
+                Console.WriteLine("Accede tus colores y separalos con comas(,):");
+                String colorUser = Console.ReadLine();
+                string[] newColors = colorUser.Split(' ');
+                Console.WriteLine(newColors);
+            }
+            static void Main(String[] args)
+            {
+                bool salir = false;
+                while (!salir)
+                {
+                    Console.WriteLine("Arreglo Sencillo");
+                    string[] sencillo = { "Rojo", "Blanco", "Morado" };
+                    Console.WriteLine("[{0}]", string.Join(", ", sencillo));
+                    Console.WriteLine("Arreglo Dos Dimensiones");
+                    int[,] dosDimensiones = new int[5, 5];
+                
+                    for (int i = 0; i < dosDimensiones.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < dosDimensiones.GetLength(1);j++)
+                        {
+                            dosDimensiones[i, j] = i+j;
+                            Console.WriteLine("{0},{1}={2}", i,j,dosDimensiones[i,j]);
+                        }
+                    }
+                    Console.WriteLine("Arreglo Tres Dimensiones");
+                    int[,,] tresDimensiones = new int[5, 5, 5];
+                    for (int i = 0; i < tresDimensiones.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < tresDimensiones.GetLength(1); j++)
+                        {
+                            for (int k = 0; k < tresDimensiones.GetLength(2); k++)
+                            {
+                                tresDimensiones[i, j, k] = i + j + k;
+                                Console.WriteLine("{0},{1},{2}={3}", i, j,k, tresDimensiones[i, j,k]);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Arreglo 4 Dimensiones");
+                    int[,,,] cuatroDimensiones = new int[5, 5, 5,5];
+                    for (int i = 0; i < cuatroDimensiones.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < cuatroDimensiones.GetLength(1); j++)
+                        {
+                            for (int k = 0; k < cuatroDimensiones.GetLength(2); k++)
+                            {
+                                for (int l = 0; l < cuatroDimensiones.GetLength(3); l++)
+                                {
+                                    cuatroDimensiones[i, j, k,l] = i + j + k+l;
+                                    Console.WriteLine("{0},{1},{2},{3}={4}", i, j, k,l, cuatroDimensiones[i, j, k,l]);
+                                }
+                            }
+                        }
+                    }
+                    string exit = Console.ReadLine();
+                    if(exit == "y")
+                    {
+                        salir = true;
+                    }
+                }
+            }
         }
-        Console.WriteLine("Dato en memoria:");
-        MemoriaData memoriaData = new MemoriaData(DataTime.Now.item["operacion"]);
-        Console.WriteLine(key.ToString());
-        Console.WriteLine(memoriaData.resiltado.ToString());
-    }
     class MemoriaData
     {
-        public DataTime fecha;
+        public DateTime fecha;
         public String operacion;
         public int resultado;
 
-        public MemoriaData(DateTime date, string operacion, int result)
-
+        public MemoriaData( String date, String operation, String result)
         {
-            fecha = date;
+            fecha = DateTime.Parse(date);
             operacion = operation;
-            resultado = result;
+            resultado = int.Parse(result);
         }
     }
-    public void arreglo()
-    {
-        string[] Colores = ["Rojo", "Blanco", "Verde"];
-        //List<string> colores = ["rojo", "blanco", "verde"];
-        //colores.Sort();
-        Array.Sort(Colores);
-        Array.ForEach(Colores, (item)=>{
-            Console.WriteLine(item);
-            });
-        sting color = Array.Find(Colores, (item) =>{
-            return item == "verde";
-        });
-        Console.WriteLine(color);
-        Console.WriteLine("Accede tus colores y separalos con comas(,)");
-        string colorUser = Console.ReadLine();
-        string[] newColors = colorUser.Split(' ');
-        Console.WriteLine(newColors);
-    }
-    public void multidimensional()
-    {
-        int[,,] array = new int [4,4,4];
-        Console.WriteLine(array);
-
-    }
-    public void Main(String[] args)
-    {
-        bool salir = false;
-        while(!salir)
-        {
-            Console.WriteLine("Arreglo sencillo");
-            string[] sencillo = {"Rojo", "Blanco", "Morado"};
-            Console.WriteLine("[{0}]", string.Join(", ", sencillo));
-            int[,,] array = new int [5,5];
-            Console.WriteLine("[{0}]", string.Join(", ", dosDimenciones));
-            for(int i = 0; i < dosDimenciones.GetLenght(0); i++;
-            {
-                for int j = 0; j < dosDimenciones.GetLenght(1); i++;
-                {
-                     Console.WriteLine("{0},{1}={2}", i, j, dosDimenciones[i, j];
-                }
-            }
-            int[,,] array = new int [5,5,5];
-            for(int i = 0; i < tresDimenciones.GetLenght(0); i++;
-            {
-                for int j = 0; j < tresDimenciones.GetLenght(1); j++;
-                {
-                     for int k = 0; k < tresDimenciones.GetLenght(2); i++;
-                    {
-                        Console.WriteLine("{0},{1},{2}={3}", i, j, K, tresDimenciones[i,j,k];
-                    }
-                }
-            }
-            Console.WriteLine("[{0}]", string.Join(", ", tresDimenciones));
-            string exit = Console.ReadLine();
-            int[,,] array = new int [5,5,5];
-            for(int i = 0; i < cuatroDimenciones.GetLenght(0); i++;
-            {
-                for int j = 0; j < cuatroDimenciones.GetLenght(1); j++;
-                {
-                     for int k = 0; k < cuatrDimenciones.GetLenght(2); k++;
-                    {
-                        for int l = 0; l < cuatroDimenciones.GetLenght(3); l++;
-                        {
-                            Console.WriteLine("{0},{1},{2}={3}", i, j, k, l cuatroDimenciones[i,j,k, l];
-
-                        }
-                    }
-                }
-            }
-            Console.WriteLine("[{0}]", string.Join(", ", tresDimenciones));
-            string exit = Console.ReadLine();
-        }
-    }
+}
 }
